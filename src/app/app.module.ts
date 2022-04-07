@@ -1,5 +1,6 @@
+import { courseReducer } from './post-store/course.reducers';
+import { metaReducers } from './post-store/index';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { PostList } from './Store/post.effect';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
@@ -8,20 +9,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GraphQLModule } from './Graph Module/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FirstComponent } from './first/first.component';
-import { postReducer } from './Store/post.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { counterReducer } from './State/state.reducer';
 import { CounterComponent } from './counter/counter.component';
-import { getDataList } from './State/state.effect';
+import { reducers } from './post-store';
+import { getEffectsPots } from './post-store/effects';
 
 @NgModule({
-  declarations: [AppComponent, FirstComponent, CounterComponent],
+  declarations: [AppComponent, CounterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    EffectsModule.forRoot([getDataList]),
-    StoreModule.forRoot({ counter: counterReducer }),
+    EffectsModule.forRoot([getEffectsPots]),
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+    }),
     StoreDevtoolsModule.instrument({
       maxAge: 100,
     }),
