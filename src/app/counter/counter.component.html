@@ -1,0 +1,13 @@
+<p>counter works!</p>
+
+<hr />
+{{ storeCounter }}
+courses$ {{ courses$ | async }}
+<hr />
+<hr />
+
+<div *ngFor="let a of courses$ | async">
+  {{ a }}
+</div>
+
+<hr />
