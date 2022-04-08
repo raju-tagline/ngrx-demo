@@ -1,0 +1,11 @@
+<p>posts works!</p>
+
+{{ storePost$ | async}}
+<hr />
+
+<div *ngFor="let post of storePost$ | async">
+  <p>{{ post }}</p>
+</div>
+
+<hr />
+<button (click)="getPost()">CLIKC</button>
