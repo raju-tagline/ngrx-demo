@@ -1,7 +1,8 @@
-import { courseReducer } from './post-store/course.reducers';
-import { metaReducers } from './post-store/index';
+import { PostsComponent } from './posts/posts.component';
+import { PostsEffects } from './ng-store/store.effects';
+import { metaReducers } from './ng-store/index';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 
@@ -11,15 +12,14 @@ import { GraphQLModule } from './Graph Module/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { CounterComponent } from './counter/counter.component';
-import { reducers } from './post-store';
-import { getEffectsPots } from './post-store/effects';
+import { reducers } from './ng-store';
 
 @NgModule({
-  declarations: [AppComponent, CounterComponent],
+  declarations: [AppComponent, CounterComponent, PostsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    EffectsModule.forRoot([getEffectsPots]),
+    EffectsModule.forRoot([PostsEffects]),
     StoreModule.forRoot(reducers, {
       metaReducers,
     }),
@@ -29,6 +29,7 @@ import { getEffectsPots } from './post-store/effects';
     GraphQLModule,
     HttpClientModule,
   ],
+  // schemas:[CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent],
 })

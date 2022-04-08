@@ -1,7 +1,9 @@
+import { Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
+import { PostsComponent } from '../posts/posts.component';
 
 const uri = 'https://graphqlzero.almansi.me/api'; // <-- add the URL of the GraphQL server here
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
@@ -10,7 +12,6 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
     cache: new InMemoryCache(),
   };
 }
-
 @NgModule({
   exports: [ApolloModule],
   providers: [

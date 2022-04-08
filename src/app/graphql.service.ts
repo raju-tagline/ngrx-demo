@@ -1,39 +1,38 @@
+import { IPostList } from './ng-store/store.interface';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
+import { Observable } from 'rxjs';
+const GET_ALLINFO = gql`
+  query ($options: PageQueryOptions) {
+    posts(options: $options) {
+      data {
+        id
+        title
+        body
+      }
+      meta {
+        totalCount
+      }
+    }
+  }
+`;
 
 @Injectable({
   providedIn: 'root',
 })
 export class GraphqlService {
-  //---------ALL POSTS DETAILS---------
-  public Get_AllInfo = gql`
-    query ($options: PageQueryOptions) {
-      posts(options: $options) {
-        data {
-          id
-          title
-          body
-        }
-        meta {
-          totalCount
-        }
-      }
-    }
-  `;
-
   constructor(private apollo: Apollo) {}
 
   /**
    * getAllPost
    */
-  public getAllPost() {
-    return new Promise((resolve: any, reject) => {
+  public getAllPost(): any {
+    return new Promise((resolve) => {
       this.apollo
         .watchQuery({
-          query: this.Get_AllInfo,
+          query: GET_ALLINFO,
         })
         .valueChanges.subscribe((res: any) => {
-          console.log('res?.data?.posts?.data :>> ', res?.data?.posts?.data);
           resolve(res?.data?.posts?.data);
         });
     });
